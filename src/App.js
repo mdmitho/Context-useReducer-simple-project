@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useEffect, useState } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import router from './components/Routes/Routes';
 
+  const PRODUCT_CONTEXT = createContext()
 function App() {
+
+const [data, setData] = useState([])
+console.log(data)
+useEffect(() =>{
+  fetch("http://localhost:5000/watch")
+  .then((res)=> res.json())
+  .then((data)=> setData(data))
+},[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container mx-auto' >
+     <RouterProvider router={router}/>
     </div>
   );
 }
